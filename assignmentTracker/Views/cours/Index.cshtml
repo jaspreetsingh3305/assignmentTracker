@@ -1,0 +1,23 @@
+﻿@model IEnumerable<assignmentTracker.Models.cours>
+
+
+@{
+    ViewBag.Title = "Courses";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.course_name)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.course_name, "Details", "cours", new { id = item.course_id }, null)
+        </td>
+    </tr>
+}
+
+</table>

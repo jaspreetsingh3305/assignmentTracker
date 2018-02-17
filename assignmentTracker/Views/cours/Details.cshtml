@@ -1,0 +1,41 @@
+﻿@model assignmentTracker.Models.cours
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Course Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.course_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.course_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.course_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.course_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.teacher_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.teacher_name)
+        </dd>
+
+    </dl>
+
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
