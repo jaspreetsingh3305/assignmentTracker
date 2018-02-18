@@ -1,6 +1,12 @@
 ﻿@model IEnumerable<assignmentTracker.Models.cours>
-
-
+<style>
+    table {
+        font-weight: bold;
+    }
+    table tr:hover {
+         background-color: #ddd;
+    }
+</style>
 @{
     ViewBag.Title = "Courses";
 }
@@ -12,12 +18,13 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink(item.course_name, "Details", "cours", new { id = item.course_id }, null)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.course_name, "Details", "cours", new { id = item.course_id }, null)
+            </td>
+        </tr>
+    }
 
 </table>
