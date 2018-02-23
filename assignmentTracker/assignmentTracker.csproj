@@ -214,6 +214,7 @@
     <Content Include="Content\images\background.jpg" />
     <Content Include="Content\images\forget.jpg" />
     <Content Include="Content\images\image.png" />
+    <Content Include="Content\my.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
