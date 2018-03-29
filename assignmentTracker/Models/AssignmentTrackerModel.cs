@@ -8,7 +8,7 @@ namespace assignmentTracker.Models
     public partial class AssignmentTrackerModel : DbContext
     {
         public AssignmentTrackerModel()
-            : base("name=AssignmentTrackerModel")
+            : base("name=DefaultConnection")
         {
         }
 

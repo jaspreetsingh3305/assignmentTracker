@@ -4,36 +4,36 @@
     ViewBag.Title = "Assignments";
 }
 <style>
-    #create{
-        font-weight:bold;
-         }
-    #action{
-        font-weight:bold;
+    #create {
+        font-weight: bold;
+    }
+
+    #action {
+        font-weight: bold;
     }
 </style>
 <h2>Pending Assignments</h2>
 <p>Note: Please remove the completed assignments</p>
 
-    <p id="create" value="create">
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.cours.course_name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.due_date)
-            </th>
-            <th>
-                Actions
-            </th>
+<p id="create" value="create">
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.cours.course_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.due_date)
+            @if (User.Identity.IsAuthenticated)
+            {
+            <th>Actions</th>}
         </tr>
 
         @foreach (var item in Model)
@@ -52,9 +52,10 @@
                     @Html.DisplayFor(modelItem => item.due_date)
                 </td>
                 <td id="action">
-                    @Html.ActionLink("Edit", "Edit", new { id = item.assignment_id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.assignment_id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.assignment_id })
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.ActionLink("Edit  ", "Edit", new { id = item.assignment_id })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.assignment_id })}
                 </td>
             </tr>
         }

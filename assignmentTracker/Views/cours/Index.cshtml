@@ -1,30 +1,38 @@
 ﻿@model IEnumerable<assignmentTracker.Models.cours>
+
 <style>
     table {
         font-weight: bold;
     }
-    table tr:hover {
-         background-color: #ddd;
-    }
+
+        table tr:hover {
+            background-color: #ddd;
+        }
 </style>
 @{
     ViewBag.Title = "Courses";
 }
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.course_name)
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+@using (Html.BeginForm("Index", "assignments", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <table class="table">
         <tr>
-            <td>
-                @Html.ActionLink(item.course_name, "Details", "cours", new { id = item.course_id }, null)
-            </td>
-        </tr>
-    }
+            <th>
+                @Html.DisplayNameFor(model => model.course_name)
+            </th>
 
-</table>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.course_name, "Index", "assignments", new { id = item.course_id }, null)
+
+                </td>
+            </tr>
+        }
+
+
+    </table>
+}

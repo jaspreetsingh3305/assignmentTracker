@@ -17,7 +17,10 @@ namespace assignmentTracker.Controllers
         // GET: cours
         public ActionResult Index()
         {
+           
             return View(db.courses.ToList());
+
+           
         }
 
         // GET: cours/Details/5

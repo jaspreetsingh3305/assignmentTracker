@@ -8,16 +8,27 @@ using System.Web;
 using System.Web.Mvc;
 using assignmentTracker.Models;
 
+
 namespace assignmentTracker.Controllers
 {
     public class assignmentsController : Controller
     {
         private AssignmentTrackerModel db = new AssignmentTrackerModel();
 
-        // GET: assignments
+        
         public ActionResult Index()
         {
+          
             var assignments = db.assignments.Include(a => a.cours);
+            
+            return View(assignments.ToList());
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(int i)
+        {
+            var assignments = db.assignments.Include(a => a.cours).Where(a => a.course_id==i);
+
             return View(assignments.ToList());
         }
 
@@ -37,7 +48,7 @@ namespace assignmentTracker.Controllers
             }
             return View(assignment);
         }
-
+        [Authorize]
         // GET: assignments/Create
         public ActionResult Create()
         {
@@ -57,23 +68,27 @@ namespace assignmentTracker.Controllers
                 db.assignments.Add(assignment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+                
             }
-
+            
+            
             ViewBag.course_id = new SelectList(db.courses, "course_id", "course_name", assignment.course_id);
             return View(assignment);
         }
-
+        [Authorize]
         // GET: assignments/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                // return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             assignment assignment = db.assignments.Find(id);
             if (assignment == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("Index");
             }
             ViewBag.course_id = new SelectList(db.courses, "course_id", "course_name", assignment.course_id);
             return View(assignment);
@@ -96,6 +111,7 @@ namespace assignmentTracker.Controllers
             return View(assignment);
         }
 
+        [Authorize]
         // GET: assignments/Delete/5
         public ActionResult Delete(int? id)
         {
