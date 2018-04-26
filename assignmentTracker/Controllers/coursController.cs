@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using assignmentTracker.Models;
 
+
 namespace assignmentTracker.Controllers
 {
     public class coursController : Controller
@@ -17,10 +18,8 @@ namespace assignmentTracker.Controllers
         // GET: cours
         public ActionResult Index()
         {
-           
             return View(db.courses.ToList());
 
-           
         }
 
         // GET: cours/Details/5
