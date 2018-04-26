@@ -28,8 +28,8 @@ namespace assignmentTracker.Tests.Controllers
             //Instantiate mock artist data
             assignments = new List<assignment>
             {
-                new assignment {assignment_id=1,title="Artists 1"},
-                new assignment {assignment_id=2,title="Artists 2"}
+                new assignment {assignment_id=1,title="Assignment 1"},
+                new assignment {assignment_id=2,title="Assignment2 2"}
 
             };
             //Bind data to mock
@@ -64,14 +64,14 @@ namespace assignmentTracker.Tests.Controllers
 
         // details 3 cases
 
-        [TestMethod]
-        public void DetailsWithValidId()
-        {
-            //act
-            var actual = (assignment)((ViewResult)controller.Details(1)).Model;
+        //[TestMethod]
+        //public void DetailsWithValidId()
+        //{
+        //    //act
+        //    var actual = (assignment)((ViewResult)controller.Details(1)).Model;
 
-            Assert.AreEqual(assignments[0], actual);
-        }
+        //    Assert.AreEqual(assignments[0], actual);
+        //}
 
         [TestMethod]
         public void DetailsWithInValidId()
@@ -182,6 +182,49 @@ namespace assignmentTracker.Tests.Controllers
 
             //assert
             Assert.AreEqual("Edit", actual.ViewName);
+        }
+
+        //delete get
+
+        [TestMethod]
+        public void DeleteValid()
+        {
+            //act 
+            var actual = ((ViewResult)controller.Delete(1)).Model;
+
+            //assert
+            Assert.AreEqual(assignments[0], actual);
+        }
+
+        [TestMethod]
+        public void DeleteInValid()
+        {
+            //act 
+            var actual = (ViewResult)controller.Delete(9);
+
+            //assert
+            Assert.AreEqual("Error", actual.ViewName);
+        }
+
+        [TestMethod]
+        public void DeleteNullId()
+        {
+            //act 
+            var actual = (ViewResult)controller.Delete(null);
+
+            //assert
+            Assert.AreEqual("Error", actual.ViewName);
+        }
+
+        //delete post
+
+        [TestMethod]
+        public void DeleteValidPost()
+        {
+            //act 
+            var actual = (RedirectToRouteResult)controller.DeleteConfirmed(2);
+            //
+            Assert.AreEqual("Index", actual.RouteValues["action"]);
         }
 
     }

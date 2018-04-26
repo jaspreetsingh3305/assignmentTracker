@@ -61,7 +61,7 @@ namespace assignmentTracker.Controllers
                 //return RedirectToAction("Index");
                 return View("Error");
             }
-            return View(assignment);
+            return View("Details",assignment);
         }
 
         [Authorize]
@@ -130,32 +130,39 @@ namespace assignmentTracker.Controllers
             return View("Edit",assignment);
         }
 
-        //[Authorize]
-        //// GET: assignments/Delete/5
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    assignment assignment = db.assignments.Find(id);
-        //    if (assignment == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(assignment);
-        //}
+        [Authorize]
+        // GET: assignments/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                // return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("Error");
+            }
+            //assignment assignment = db.assignments.Find(id);
 
-        //// POST: assignments/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    assignment assignment = db.assignments.Find(id);
-        //    db.assignments.Remove(assignment);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+            assignment assignment = db.assignments.SingleOrDefault(a => a.assignment_id == id);
+
+            if (assignment == null)
+            {
+                // return HttpNotFound();
+                return View("Error");
+            }
+            return View("Delete",assignment);
+        }
+
+        // POST: assignments/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            //assignment assignment = db.assignments.Find(id);
+            //db.assignments.Remove(assignment);
+            //db.SaveChanges();
+            assignment assignment = db.assignments.SingleOrDefault(a => a.assignment_id == id);
+            db.Delete(assignment);
+            return RedirectToAction("Index");
+        }
 
         //protected override void Dispose(bool disposing)
         //{

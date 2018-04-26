@@ -10,9 +10,10 @@ namespace assignmentTracker.Models
         private AssignmentTrackerModel db = new AssignmentTrackerModel();
         public IQueryable<assignment> assignments => db.assignments;
 
-        public void Delete(assignment a)
+        public void Delete(assignment assignment)
         {
-            throw new NotImplementedException();
+            db.assignments.Remove(assignment);
+            db.SaveChanges();
         }
 
         public assignment Save(assignment assignment)
